@@ -2,6 +2,8 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Home from '../Home/Home';
+import ChannelingForm from '../Channeling/ChannelingForm';
+
 
 
 export default class Main extends React.Component {
@@ -14,6 +16,9 @@ export default class Main extends React.Component {
 
                         <Route exact path="/home">
                             <Home />
+                        </Route>
+                        <Route exact path="/channeling">
+                            <ChannelingForm />
                         </Route>
                     </Switch>
                 </div>

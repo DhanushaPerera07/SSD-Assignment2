@@ -3,6 +3,13 @@ import { Form, Button, Card } from 'react-bootstrap';
 
 export default class ChannelingForm extends React.Component {
     render() {
+        var gapi = window.gapi
+        var CLIENT_ID = ""
+        var API_KEY = ""
+
+        const handleClick = () =>{
+            alert("Hi")
+        }
         return (
             <div>
                 <h1 style={{ marginTop: '5%' }}>Enter patient's details</h1>
@@ -45,9 +52,9 @@ export default class ChannelingForm extends React.Component {
                         <Form.Control type="file" />
                     </Form.Group>
                     <div className="row">
-                             <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
+                             <Button variant="primary" onClick={handleClick}>
+                                    Submit
+                             </Button>
                     </div>
                    
                     </Form>

@@ -17,10 +17,29 @@ export default class ChannelingForm extends React.Component {
                         <Form.Label>Age</Form.Label>
                         <Form.Control type="age" placeholder="Enter Age" />
                     </Form.Group>
+
+                    <Form.Group controlId="formBasicDelivery">
+                        <Form.Label >Select a Doctor</Form.Label> <br></br>
+                        <Form.Control name="doctorName" as="select"
+                            custom
+                            >
+                            <option value="Select">Select a Doctor</option>
+
+                            <option value="Janaka">Dr. Janaka Dissanayake</option>
+                            <option value="Menura">Dr. Menura Dewalegama</option>
+                            <option value="Danusha">Dr. Danusha Perera</option>
+                            <option value="Sachintha">Dr. Sachintha de Zoysa</option>
+
+                        </Form.Control>
+                    </Form.Group>
+
+                    <br></br>
+
                     <Form.Group controlId="formFile" className="mb-3">
                         <Form.Label>Insert an image of your payment slip</Form.Label><br></br>
                         <Form.Control type="file" />
                     </Form.Group>
+
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>

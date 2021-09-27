@@ -17,7 +17,7 @@ export default class Main extends React.Component {
                         <Route exact path="/home">
                             <Home />
                         </Route>
-                        <Route exact path="/channeling">
+                        <Route  path="/channeling">
                             <ChannelingForm />
                         </Route>
                     </Switch>

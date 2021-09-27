@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavigationBar from './Components/NavigationBar/NavigationBar';
 import Main from './Components/Main/Main'
+import "react-bootstrap/dist/react-bootstrap";
 
 export default class App extends React.Component {
     render() {

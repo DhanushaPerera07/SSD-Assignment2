@@ -4,11 +4,64 @@ import { Form, Button, Card } from 'react-bootstrap';
 export default class ChannelingForm extends React.Component {
     render() {
         var gapi = window.gapi
-        var CLIENT_ID = ""
-        var API_KEY = ""
+        var CLIENT_ID = "685011427244-5rn6dm5o8c5r416hk4e4d5dtof5h543o.apps.googleusercontent.com"
+        var API_KEY = "AIzaSyA1kTZihvKXk_xVCIPUxDAIK8br4JNNlqg"
+        var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
+        var SCOPE = "https://www.googleapis.com/auth/calendar.events"
 
         const handleClick = () =>{
-            alert("Hi")
+            gapi.load('client:auth2', () => {
+                console.log('loaded client')
+
+                gapi.client.init({
+                    apiKey: API_KEY,
+                    clientId: CLIENT_ID,
+                    discoveryDocs: DISCOVERY_DOCS,
+                    scope: SCOPE,
+                })
+
+                gapi.client.load('calender', 'v3', () => console.log('bam!'))
+
+                gapi.auth2.getAuthInstance().signIn()
+                .then(() =>{
+                    var event = {
+                        'summary': 'SLIIT_SSD 2021 - Code4Technology',
+                        'location': 'Main Auditorium, SLIIT, Malabe',
+                        'description': 'A chance to hear more about Google\'s developer products.',
+                        'start': {
+                          'dateTime': '2021-09-29T09:00:00-07:00',
+                          'timeZone': 'America/Los_Angeles'
+                        },
+                        'end': {
+                          'dateTime': '2021-09-30T17:00:00-07:00',
+                          'timeZone': 'America/Los_Angeles'
+                        },
+                        'recurrence': [
+                          'RRULE:FREQ=DAILY;COUNT=2'
+                        ],
+                        'attendees': [
+                          {'email': 'menuradewalegama@gmail.com'},
+                          {'email': 'sachinthazoysa@gmail.com'}
+                        ],
+                        'reminders': {
+                          'useDefault': false,
+                          'overrides': [
+                            {'method': 'email', 'minutes': 24 * 60},
+                            {'method': 'popup', 'minutes': 10}
+                          ]
+                        }
+                      }
+
+                      var request = gapi.client.calendar.events.insert({
+                        'calendarId': 'primary',
+                        'resource': event
+                      });
+                      
+                      request.execute(event =>{
+                          window.open(event.htmlLink)
+                      })
+                })
+            })
         }
         return (
             <div>

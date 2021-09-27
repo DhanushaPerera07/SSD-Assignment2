@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavigationBar from './Components/NavigationBar/NavigationBar';
+import Main from './Components/Main/Main'
 
 export default class App extends React.Component {
     render() {
@@ -12,6 +13,8 @@ export default class App extends React.Component {
                             <div>
                                 {/* navigation bar component. */}
                                 <NavigationBar />
+
+                                <Main />
                             </div>
                         </Route>
                     </Switch>

@@ -1,26 +1,22 @@
-import "./App.css";
-import {Col, Container, Row} from 'react-bootstrap';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import NavigationBar from './Components/NavigationBar/NavigationBar';
 
-function App() {
-  return (
-    <div className="App">
-        <Container>
-            <Row>
-                <Col className={"main_header_col"}>
-                    <h3>Assignment Submission File Generator Tool</h3>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    Section 1
-                </Col>
-                <Col>
-                    Section 2
-                </Col>
-            </Row>
-        </Container>
-    </div>
-  );
+export default class App extends React.Component {
+    render() {
+        return (
+            <div style={{ height: '100vh' }}>
+                <Router>
+                    <Switch>
+                        <Route path="/">
+                            <div>
+                                {/* navigation bar component. */}
+                                <NavigationBar />
+                            </div>
+                        </Route>
+                    </Switch>
+                </Router>
+            </div>
+        );
+    }
 }
-
-export default App;

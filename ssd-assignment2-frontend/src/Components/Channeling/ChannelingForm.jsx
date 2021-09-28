@@ -2,12 +2,34 @@ import React from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 
 export default class ChannelingForm extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            summary: null,
+            location: null,
+            description: null,
+            startDateTime: null,
+            endDateTime: null,
+            timeZone:null,
+            email:null,
+
+
+        }
+    }
+
     render() {
         var gapi = window.gapi
         var CLIENT_ID = "685011427244-5rn6dm5o8c5r416hk4e4d5dtof5h543o.apps.googleusercontent.com"
         var API_KEY = "AIzaSyA1kTZihvKXk_xVCIPUxDAIK8br4JNNlqg"
         var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
         var SCOPE = "https://www.googleapis.com/auth/calendar.events"
+
+        const onChange = (event) =>{
+            const { name, value } = event.target;
+            this.setState({ [name]: value });
+            console.log(this.state.summary);
+        }
 
         const handleClick = () =>{
             gapi.load('client:auth2', () => {
@@ -25,9 +47,9 @@ export default class ChannelingForm extends React.Component {
                 gapi.auth2.getAuthInstance().signIn()
                 .then(() =>{
                     var event = {
-                        'summary': 'SLIIT_SSD 2021 - Code4Technology',
-                        'location': 'Main Auditorium, SLIIT, Malabe',
-                        'description': 'A chance to hear more about Google\'s developer products.',
+                        'summary': this.state.summary,
+                        'location': this.state.location,
+                        'description': this.state.description,
                         'start': {
                           'dateTime': '2021-09-29T09:00:00-07:00',
                           'timeZone': 'America/Los_Angeles'
@@ -41,7 +63,8 @@ export default class ChannelingForm extends React.Component {
                         ],
                         'attendees': [
                           {'email': 'menuradewalegama@gmail.com'},
-                          {'email': 'sachinthazoysa@gmail.com'}
+                          {'email': 'sachinthazoysa@gmail.com'},
+                          {'email': this.state.email}
                         ],
                         'reminders': {
                           'useDefault': false,
@@ -72,51 +95,60 @@ export default class ChannelingForm extends React.Component {
                     <div className="col-md-4">
                         <Card className="container">
                             <br/>
-                        <Form >
-                    <Form.Group className="mb-3" controlId="formBasicName">
-                        <Form.Label>Patient Name</Form.Label>
-                        <Form.Control type="name" placeholder="Enter Namel" />
-                    </Form.Group>
+                            <Form >
+                                <Form.Group className="mb-3" controlId="formBasicName">
+                                    <Form.Label>Summary</Form.Label>
+                                    <Form.Control type="text" name="summary" placeholder="Enter Summary" onChange={event => onChange(event)} />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicAge">
+                                    <Form.Label>location</Form.Label>
+                                    <Form.Control type="text" name="location" placeholder="Enter location"  onChange={event => onChange(event)}/>
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicAge">
+                                    <Form.Label>description</Form.Label>
+                                    <Form.Control type="text" name="description" placeholder="Enter description"  onChange={event => onChange(event)}/>
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicAge">
+                                    <Form.Label>Time from</Form.Label>
+                                    <Form.Control type="datetime-local" name="startDatetime"  onChange={event => onChange(event)}/>
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicAge">
+                                    <Form.Label>Time to</Form.Label>
+                                    <Form.Control type="datetime-local" name="endDatetime"  onChange={event => onChange(event)}/>
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicAge">
+                                    <Form.Label>Patient Email</Form.Label>
+                                    <Form.Control type="email" name="email" placeholder="Enter email"  onChange={event => onChange(event)}/>
+                                </Form.Group>
+                                <Form.Group controlId="formBasicDelivery">
+                                    <Form.Label >Select a Doctor</Form.Label> <br></br>
+                                    <Form.Control name="doctorName" as="select"
+                                        custom  className="form-control"  onChange={event => onChange(event)}
+                                        >
+                                        <option value="Select">Select a Doctor</option>
 
-                    <Form.Group className="mb-3" controlId="formBasicAge">
-                        <Form.Label>Age</Form.Label>
-                        <Form.Control type="age" placeholder="Enter Age" />
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicDelivery">
-                        <Form.Label >Select a Doctor</Form.Label> <br></br>
-                        <Form.Control name="doctorName" as="select"
-                            custom  className="form-control"
-                            >
-                            <option value="Select">Select a Doctor</option>
-
-                            <option value="Janaka">Dr. Janaka Dissanayake</option>
-                            <option value="Menura">Dr. Menura Dewalegama</option>
-                            <option value="Danusha">Dr. Danusha Perera</option>
-                            <option value="Sachintha">Dr. Sachintha de Zoysa</option>
-
-                        </Form.Control>
-                    </Form.Group>
-
-                    <br></br>
-
-                    <Form.Group controlId="formFile" className="mb-3">
-                        <Form.Label>Insert an image of your payment slip</Form.Label><br></br>
-                        <Form.Control type="file" />
-                    </Form.Group>
-                    <div className="row">
-                             <Button variant="primary" onClick={handleClick}>
-                                    Submit
-                             </Button>
-                    </div>
-                   
-                    </Form>
-                    <br/>
-                        </Card>
+                                        <option value="janakachinthana1@gmail.com">Dr. Janaka Dissanayake</option>
+                                        <option value="Menura">Dr. Menura Dewalegama</option>
+                                        <option value="Danusha">Dr. Danusha Perera</option>
+                                        <option value="Sachintha">Dr. Sachintha de Zoysa</option>
+                                    </Form.Control>
+                                </Form.Group>
+                                <br></br>
+                                <Form.Group controlId="formFile" className="mb-3">
+                                    <Form.Label>Insert an image of your payment slip</Form.Label><br></br>
+                                    <Form.Control type="file" />
+                                </Form.Group>
+                                <div className="row">
+                                    <Button variant="primary" onClick={handleClick}>
+                                                Submit
+                                    </Button>
+                                </div>
+                            </Form>
+                            <br/>
+                        </Card>         
                     </div>
                 </div>
-                
-                </div>
+            </div>
         );
     }
 }

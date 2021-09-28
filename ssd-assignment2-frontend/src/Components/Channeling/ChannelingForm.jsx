@@ -5,18 +5,47 @@ export default class ChannelingForm extends React.Component {
 
     constructor(props) {
         super(props);
+        this.onChange = this.onChange.bind(this);
+        this.display = this.display.bind(this);
+        this._onStartDateChange = this._onStartDateChange.bind(this);
+        this._onEndDateChange = this._onEndDateChange.bind(this);
         this.state = {
-            summary: null,
-            location: null,
-            description: null,
-            startDateTime: null,
-            endDateTime: null,
-            timeZone:null,
-            email:null,
-
-
+            summary: '',
+            location: '',
+            description: '',
+            startDateTime: '',
+            endDateTime: '',
+            timeZone: '',
+            email: '',
+            doctorName: ''
         }
     }
+
+    onChange(event) {
+        this.setState({ [event.target.name]: event.target.value });
+    }
+
+    _onStartDateChange(e) {
+        let state = this.state;
+        state['startDateTime'] = e.target.value;
+        this.setState(state);
+    }
+
+    _onEndDateChange(e) {
+        let state = this.state;
+        state['startDateTime'] = e.target.value;
+        this.setState(state);
+    }
+
+    display() {
+        console.log(this.state.summary);
+        console.log(this.state.location);
+        console.log(this.state.description);
+        console.log(this.state.startDateTime);
+        console.log(this.state.doctorName);
+    }
+
+    
 
     render() {
         var gapi = window.gapi
@@ -25,13 +54,9 @@ export default class ChannelingForm extends React.Component {
         var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
         var SCOPE = "https://www.googleapis.com/auth/calendar.events"
 
-        const onChange = (event) =>{
-            const { name, value } = event.target;
-            this.setState({ [name]: value });
-            console.log(this.state.summary);
-        }
 
-        const handleClick = () =>{
+
+        const handleClick = () => {
             gapi.load('client:auth2', () => {
                 console.log('loaded client')
 
@@ -45,86 +70,90 @@ export default class ChannelingForm extends React.Component {
                 gapi.client.load('calender', 'v3', () => console.log('bam!'))
 
                 gapi.auth2.getAuthInstance().signIn()
-                .then(() =>{
-                    var event = {
-                        'summary': this.state.summary,
-                        'location': this.state.location,
-                        'description': this.state.description,
-                        'start': {
-                          'dateTime': '2021-09-29T09:00:00-07:00',
-                          'timeZone': 'America/Los_Angeles'
-                        },
-                        'end': {
-                          'dateTime': '2021-09-30T17:00:00-07:00',
-                          'timeZone': 'America/Los_Angeles'
-                        },
-                        'recurrence': [
-                          'RRULE:FREQ=DAILY;COUNT=2'
-                        ],
-                        'attendees': [
-                          {'email': 'menuradewalegama@gmail.com'},
-                          {'email': 'sachinthazoysa@gmail.com'},
-                          {'email': this.state.email}
-                        ],
-                        'reminders': {
-                          'useDefault': false,
-                          'overrides': [
-                            {'method': 'email', 'minutes': 24 * 60},
-                            {'method': 'popup', 'minutes': 10}
-                          ]
+                    .then(() => {
+                        var event = {
+                            'summary': this.state.summary,
+                            'location': this.state.location,
+                            'description': this.state.description,
+                            'start': {
+                                'dateTime': '2021-09-29T09:00:00-07:00',
+                                'timeZone': 'America/Los_Angeles'
+                            },
+                            'end': {
+                                'dateTime': '2021-09-30T17:00:00-07:00',
+                                'timeZone': 'America/Los_Angeles'
+                            },
+                            'recurrence': [
+                                'RRULE:FREQ=DAILY;COUNT=2'
+                            ],
+                            'attendees': [
+                                { 'email': 'menuradewalegama@gmail.com' },
+                                { 'email': 'sachinthazoysa@gmail.com' },
+                                { 'email': this.state.email }
+                            ],
+                            'reminders': {
+                                'useDefault': false,
+                                'overrides': [
+                                    { 'method': 'email', 'minutes': 24 * 60 },
+                                    { 'method': 'popup', 'minutes': 10 }
+                                ]
+                            }
                         }
-                      }
 
-                      var request = gapi.client.calendar.events.insert({
-                        'calendarId': 'primary',
-                        'resource': event
-                      });
-                      
-                      request.execute(event =>{
-                          window.open(event.htmlLink)
-                      })
-                })
+                        var request = gapi.client.calendar.events.insert({
+                            'calendarId': 'primary',
+                            'resource': event
+                        });
+
+                        request.execute(event => {
+                            window.open(event.htmlLink)
+                        })
+                    })
             })
         }
+
+
+
+
         return (
             <div>
                 <h1 style={{ marginTop: '5%' }}>Enter patient's details</h1>
                 <hr></hr>
-                <div className="row"> 
+                <div className="row">
                     <div className="col-md-4"></div>
                     <div className="col-md-4">
                         <Card className="container">
-                            <br/>
+                            <br />
                             <Form >
                                 <Form.Group className="mb-3" controlId="formBasicName">
                                     <Form.Label>Summary</Form.Label>
-                                    <Form.Control type="text" name="summary" placeholder="Enter Summary" onChange={event => onChange(event)} />
+                                    <Form.Control type="text" name="summary" placeholder="Enter Summary" value={this.state.summary} onChange={this.onChange} />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>location</Form.Label>
-                                    <Form.Control type="text" name="location" placeholder="Enter location"  onChange={event => onChange(event)}/>
+                                    <Form.Control type="text" name="location" placeholder="Enter location" value={this.state.location} onChange={this.onChange} />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>description</Form.Label>
-                                    <Form.Control type="text" name="description" placeholder="Enter description"  onChange={event => onChange(event)}/>
+                                    <Form.Control type="text" name="description" placeholder="Enter description" value={this.state.description} onChange={this.onChange} />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>Time from</Form.Label>
-                                    <Form.Control type="datetime-local" name="startDatetime"  onChange={event => onChange(event)}/>
+                                    <Form.Control type="datetime-local" name="startDatetime" ref={(startDateTime) => { this.dateRef = startDateTime; }} value={this.state.startDateTime} onChange={this._onStartDateChange} />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>Time to</Form.Label>
-                                    <Form.Control type="datetime-local" name="endDatetime"  onChange={event => onChange(event)}/>
+                                    <Form.Control type="datetime-local" name="endDatetime" ref={(endDatetime) => { this.dateRef = endDatetime; }} value={this.state.endDatetime} onChange={this._onEndDateChange} />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>Patient Email</Form.Label>
-                                    <Form.Control type="email" name="email" placeholder="Enter email"  onChange={event => onChange(event)}/>
+                                    <Form.Control type="email" name="email" placeholder="Enter email" value={this.state.email} onChange={this.onChange} />
                                 </Form.Group>
                                 <Form.Group controlId="formBasicDelivery">
                                     <Form.Label >Select a Doctor</Form.Label> <br></br>
                                     <Form.Control name="doctorName" as="select"
-                                        custom  className="form-control"  onChange={event => onChange(event)}
-                                        >
+                                        custom className="form-control" value={this.state.doctorName} onChange={this.onChange}
+                                    >
                                         <option value="Select">Select a Doctor</option>
 
                                         <option value="janakachinthana1@gmail.com">Dr. Janaka Dissanayake</option>
@@ -139,13 +168,13 @@ export default class ChannelingForm extends React.Component {
                                     <Form.Control type="file" />
                                 </Form.Group>
                                 <div className="row">
-                                    <Button variant="primary" onClick={handleClick}>
-                                                Submit
+                                    <Button variant="primary" onClick={this.display}>
+                                        Submit
                                     </Button>
                                 </div>
                             </Form>
-                            <br/>
-                        </Card>         
+                            <br />
+                        </Card>
                     </div>
                 </div>
             </div>

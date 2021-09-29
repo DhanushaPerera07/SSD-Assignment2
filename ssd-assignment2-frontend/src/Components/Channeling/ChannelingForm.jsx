@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
+import {AuthContext} from '../../context/auth.context';
 
-export default class ChannelingForm extends React.Component {
+export default class ChannelingForm extends Component {
+
+    static contextType = AuthContext;
 
     constructor(props) {
         super(props);
@@ -48,7 +51,7 @@ export default class ChannelingForm extends React.Component {
     
 
     render() {
-        var gapi = window.gapi
+        var gapi = window.gapi;
         var CLIENT_ID = "685011427244-5rn6dm5o8c5r416hk4e4d5dtof5h543o.apps.googleusercontent.com"
         var API_KEY = "AIzaSyA1kTZihvKXk_xVCIPUxDAIK8br4JNNlqg"
         var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
@@ -168,7 +171,7 @@ export default class ChannelingForm extends React.Component {
                                     <Form.Control type="file" />
                                 </Form.Group>
                                 <div className="row">
-                                    <Button variant="primary" onClick={this.display}>
+                                    <Button variant="primary" onClick={handleClick}>
                                         Submit
                                     </Button>
                                 </div>

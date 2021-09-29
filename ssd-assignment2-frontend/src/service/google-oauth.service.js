@@ -107,11 +107,41 @@ const getUserProfileDetails = () => {
     let request = gapi.client.drive.about.get({'fields': 'user'});
 
     // Execute the API request.
-    request.execute(function(response) {
+    request.execute(function (response) {
         // currentUser = response.user;
         console.log(response);
     });
-}
+};
+
+/** Upload file to google drive. */
+const uploadToGoogleDrive = (fileData) => {
+    console.log('execute upload file to google function!');
+    console.log('printing uploaded file: ');
+    console.log(fileData);
+
+    // Make API request
+    // let request = gapi.client.drive.files.create(fileData);
+
+    // Execute the API request.
+    // request.execute(function(response) {
+    //     console.log('file upload response: ');
+    //     console.log(response);
+    // });
+};
+
+
+/** Create calender event on google calender. */
+const createCalendarEventOnGoogleCalendar = (calendarEventData) => {
+    console.log('execute create calender event on google calender!');
+
+    // Make API request
+    // let request = gapi.client.drive.about.get({'fields': 'user'});
+
+    // Execute the API request.
+    // request.execute(function(response) {
+    //     console.log(response);
+    // });
+};
 
 export {
     gapi,
@@ -119,5 +149,7 @@ export {
     currentUser,
     isAuthorized,
     initialize,
-    getUserProfileDetails
+    getUserProfileDetails,
+    uploadToGoogleDrive,
+    createCalendarEventOnGoogleCalendar
 };

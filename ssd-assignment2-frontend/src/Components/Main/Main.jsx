@@ -3,6 +3,7 @@ import {Container} from 'react-bootstrap';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import Home from '../Home/Home';
 import ChannelingForm from '../Channeling/ChannelingForm';
+import FileUpload from '../FileUpload/FileUpload';
 
 
 export default class Main extends Component {
@@ -18,6 +19,9 @@ export default class Main extends Component {
                         </Route>
                         <Route path="/channeling">
                             <ChannelingForm/>
+                        </Route>
+                        <Route path={'/uploads'}>
+                            <FileUpload/>
                         </Route>
                     </Switch>
                 </div>

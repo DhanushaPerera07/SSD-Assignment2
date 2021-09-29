@@ -46,7 +46,7 @@ const updateSigningStatus = (isSignedIn) => {
     console.log(`updateSigningStatus method----> isAuthorized: ${isAuthorized}`);
 };
 
-function sendAuthorizedApiRequest(requestDetails) {
+/*function sendAuthorizedApiRequest(requestDetails) {
     console.log('works');
     currentApiRequest = requestDetails;
     if (isAuthorized) {
@@ -88,7 +88,7 @@ function sendAuthorizedApiRequest(requestDetails) {
     } else {
         GoogleAuth.signIn();
     }
-}
+}*/
 
 
 function setSigningStatus() {

@@ -9,7 +9,7 @@ export default class ChannelingForm extends Component {
     constructor(props) {
         super(props);
         this.onChange = this.onChange.bind(this);
-        this.display = this.display.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         this._onStartDateChange = this._onStartDateChange.bind(this);
         this._onEndDateChange = this._onEndDateChange.bind(this);
         this.state = {
@@ -40,84 +40,72 @@ export default class ChannelingForm extends Component {
         this.setState(state);
     }
 
-    display() {
-        console.log(this.state.summary);
-        console.log(this.state.location);
-        console.log(this.state.description);
-        console.log(this.state.startDateTime);
-        console.log(this.state.doctorName);
-    }
-
-    
-
-    render() {
-        var gapi = window.gapi;
+    handleClick() {
+        var gapi = window.gapi
         var CLIENT_ID = "685011427244-5rn6dm5o8c5r416hk4e4d5dtof5h543o.apps.googleusercontent.com"
         var API_KEY = "AIzaSyA1kTZihvKXk_xVCIPUxDAIK8br4JNNlqg"
         var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
         var SCOPE = "https://www.googleapis.com/auth/calendar.events"
 
+        gapi.load('client:auth2', () => {
+            console.log('loaded client')
 
-
-        const handleClick = () => {
-            gapi.load('client:auth2', () => {
-                console.log('loaded client')
-
-                gapi.client.init({
-                    apiKey: API_KEY,
-                    clientId: CLIENT_ID,
-                    discoveryDocs: DISCOVERY_DOCS,
-                    scope: SCOPE,
-                })
-
-                gapi.client.load('calender', 'v3', () => console.log('bam!'))
-
-                gapi.auth2.getAuthInstance().signIn()
-                    .then(() => {
-                        var event = {
-                            'summary': this.state.summary,
-                            'location': this.state.location,
-                            'description': this.state.description,
-                            'start': {
-                                'dateTime': '2021-09-29T09:00:00-07:00',
-                                'timeZone': 'America/Los_Angeles'
-                            },
-                            'end': {
-                                'dateTime': '2021-09-30T17:00:00-07:00',
-                                'timeZone': 'America/Los_Angeles'
-                            },
-                            'recurrence': [
-                                'RRULE:FREQ=DAILY;COUNT=2'
-                            ],
-                            'attendees': [
-                                { 'email': 'menuradewalegama@gmail.com' },
-                                { 'email': 'sachinthazoysa@gmail.com' },
-                                { 'email': this.state.email }
-                            ],
-                            'reminders': {
-                                'useDefault': false,
-                                'overrides': [
-                                    { 'method': 'email', 'minutes': 24 * 60 },
-                                    { 'method': 'popup', 'minutes': 10 }
-                                ]
-                            }
-                        }
-
-                        var request = gapi.client.calendar.events.insert({
-                            'calendarId': 'primary',
-                            'resource': event
-                        });
-
-                        request.execute(event => {
-                            window.open(event.htmlLink)
-                        })
-                    })
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPE,
             })
-        }
 
+            gapi.client.load('calender', 'v3', () => console.log('bam!'))
 
+            gapi.auth2.getAuthInstance().signIn()
+                .then(() => {
+                    var event = {
+                        'summary': this.state.summary,
+                        'location': this.state.location,
+                        'description': this.state.description,
+                        'start': {
+                            'dateTime': '2021-09-29T09:00:00-07:00',
+                            'timeZone': 'America/Los_Angeles'
+                        },
+                        'end': {
+                            'dateTime': '2021-09-30T17:00:00-07:00',
+                            'timeZone': 'America/Los_Angeles'
+                        },
+                        'recurrence': [
+                            'RRULE:FREQ=DAILY;COUNT=2'
+                        ],
+                        'attendees': [
+                            { 'email': 'menuradewalegama@gmail.com' },
+                            { 'email': 'sachinthazoysa@gmail.com' },
+                            { 'email': this.state.email }
+                        ],
+                        'reminders': {
+                            'useDefault': false,
+                            'overrides': [
+                                { 'method': 'email', 'minutes': 24 * 60 },
+                                { 'method': 'popup', 'minutes': 10 }
+                            ]
+                        }
+                    }
 
+                    var request = gapi.client.calendar.events.insert({
+                        'calendarId': 'primary',
+                        'resource': event
+                    });
 
+                    request.execute(event => {
+                        window.open(event.htmlLink)
+                    })
+                })
+        })
+    }
+
+    
+
+    render() {
+       
         return (
             <div>
                 <h1 style={{ marginTop: '5%' }}>Enter patient's details</h1>
@@ -171,7 +159,7 @@ export default class ChannelingForm extends Component {
                                     <Form.Control type="file" />
                                 </Form.Group>
                                 <div className="row">
-                                    <Button variant="primary" onClick={handleClick}>
+                                    <Button variant="primary" onClick={this.handleClick}>
                                         Submit
                                     </Button>
                                 </div>

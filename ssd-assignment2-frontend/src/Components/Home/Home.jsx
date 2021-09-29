@@ -1,6 +1,7 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 import {AuthContext} from '../../context/auth.context';
+import {Button} from 'react-bootstrap';
 
 export default class Home extends React.Component {
 
@@ -53,6 +54,10 @@ export default class Home extends React.Component {
                 <h5>{googleId}</h5>
                 <h5>{imageUrl}</h5>
                 <img src={imageUrl} alt="Italian Trulli"></img>
+
+                <br/>
+                <br/>
+                <Button variant={'primary'} onClick={this.context.getUserProfileDetails}>Get Google User Details</Button>
             </div>
         );
     }

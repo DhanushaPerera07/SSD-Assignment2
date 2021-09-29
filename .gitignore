@@ -4,6 +4,8 @@
 /node_modules
 /ssd-assginment2-frontend/node_modules
 /ssd-assginment2-frontend/.idea
+./ssd-assginment2-frontend/.idea
+/ssd-assginment2-frontend/.idea/
 /ssd-assginment2-frontend/package-lock.json
 /.pnp
 .pnp.js

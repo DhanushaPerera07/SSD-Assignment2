@@ -10,42 +10,16 @@ export default class ChannelingForm extends React.Component {
         this._onStartDateChange = this._onStartDateChange.bind(this);
         this._onEndDateChange = this._onEndDateChange.bind(this);
         this.state = {
-            summary: '',
-            location: '',
-            description: '',
-            startDateTime: '',
-            endDateTime: '',
-            timeZone: '',
-            email: '',
-            doctorName: ''
+            summary: null,
+            location: null,
+            description: null,
+            startDateTime: null,
+            endDateTime: null,
+            timeZone:null,
+            email:null,
         }
     }
 
-    onChange(event) {
-        this.setState({ [event.target.name]: event.target.value });
-    }
-
-    _onStartDateChange(e) {
-        let state = this.state;
-        state['startDateTime'] = e.target.value;
-        this.setState(state);
-    }
-
-    _onEndDateChange(e) {
-        let state = this.state;
-        state['startDateTime'] = e.target.value;
-        this.setState(state);
-    }
-
-    display() {
-        console.log(this.state.summary);
-        console.log(this.state.location);
-        console.log(this.state.description);
-        console.log(this.state.startDateTime);
-        console.log(this.state.doctorName);
-    }
-
-    
 
     render() {
         var gapi = window.gapi
@@ -54,7 +28,11 @@ export default class ChannelingForm extends React.Component {
         var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
         var SCOPE = "https://www.googleapis.com/auth/calendar.events"
 
-
+        const onChange = (event) =>{
+            const { name, value } = event.target;
+            this.setState({ [name]: value });
+            console.log(this.state);
+        }
 
         const handleClick = () => {
             gapi.load('client:auth2', () => {
@@ -139,11 +117,12 @@ export default class ChannelingForm extends React.Component {
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>Time from</Form.Label>
-                                    <Form.Control type="datetime-local" name="startDatetime" ref={(startDateTime) => { this.dateRef = startDateTime; }} value={this.state.startDateTime} onChange={this._onStartDateChange} />
+                                    <Form.Control type="datetime-local" name="startDateTime"  onChange={event => onChange(event)}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>Time to</Form.Label>
-                                    <Form.Control type="datetime-local" name="endDatetime" ref={(endDatetime) => { this.dateRef = endDatetime; }} value={this.state.endDatetime} onChange={this._onEndDateChange} />
+                                    <Form.Control type="datetime-local" name="endDateTime"  onChange={event => onChange(event)}/>
+
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>Patient Email</Form.Label>

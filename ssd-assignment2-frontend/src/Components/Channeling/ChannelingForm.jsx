@@ -13,8 +13,6 @@ export default class ChannelingForm extends React.Component {
             endDateTime: null,
             timeZone:null,
             email:null,
-
-
         }
     }
 
@@ -28,7 +26,7 @@ export default class ChannelingForm extends React.Component {
         const onChange = (event) =>{
             const { name, value } = event.target;
             this.setState({ [name]: value });
-            console.log(this.state.summary);
+            console.log(this.state);
         }
 
         const handleClick = () =>{
@@ -110,11 +108,11 @@ export default class ChannelingForm extends React.Component {
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>Time from</Form.Label>
-                                    <Form.Control type="datetime-local" name="startDatetime"  onChange={event => onChange(event)}/>
+                                    <Form.Control type="datetime-local" name="startDateTime"  onChange={event => onChange(event)}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>Time to</Form.Label>
-                                    <Form.Control type="datetime-local" name="endDatetime"  onChange={event => onChange(event)}/>
+                                    <Form.Control type="datetime-local" name="endDateTime"  onChange={event => onChange(event)}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>Patient Email</Form.Label>

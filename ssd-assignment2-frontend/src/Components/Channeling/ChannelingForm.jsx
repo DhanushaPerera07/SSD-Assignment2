@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
+import {AuthContext} from '../../context/auth.context';
 
-export default class ChannelingForm extends React.Component {
+export default class ChannelingForm extends Component {
+
+    static contextType = AuthContext;
 
     constructor(props) {
         super(props);

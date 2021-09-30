@@ -52,7 +52,9 @@ class FileUpload extends Component {
                         }
                     }>
                         <Form.Label>Upload your payment slip</Form.Label>
-                        <Form.Control type="file" multiple onChange={(event) =>
+                        <Form.Control type="file"
+                                      accept={'image/png,image/jpeg'}
+                                      onChange={(event) =>
                             this.onChangeFileUpload(event)}/>
                     </Form.Group>
 

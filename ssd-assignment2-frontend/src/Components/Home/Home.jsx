@@ -20,9 +20,11 @@ const slideProperties = {
 // ];
 
 const slideImages = [
-    'https://images.unsplash.com/photo-1491895200222-0fc4a4c35e18?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNhbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
-    'https://images.unsplash.com/photo-1491895200222-0fc4a4c35e18?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNhbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
-    'https://images.unsplash.com/photo-1491895200222-0fc4a4c35e18?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNhbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80'
+    'https://www.wallpaperflare.com/static/88/237/206/heart-minimalism-white-background-simple-background-wallpaper.jpg',
+    'https://www.wallpaperflare.com/static/88/237/206/heart-minimalism-white-background-simple-background-wallpaper.jpg',
+    'https://www.wallpaperflare.com/static/88/237/206/heart-minimalism-white-background-simple-background-wallpaper.jpg',
+    'https://www.wallpaperflare.com/static/88/237/206/heart-minimalism-white-background-simple-background-wallpaper.jpg'
+
 ];
 
 export default class Home extends React.Component {
@@ -68,7 +70,7 @@ export default class Home extends React.Component {
         return (
             <div style={{ textAlign: 'center', height: '500px' }}>
 
-                <br />        
+                <br />
                 <br />
                 <br />
 
@@ -76,17 +78,9 @@ export default class Home extends React.Component {
                 <h1 style={{ fontFamily: 'cursive' }}>Book your Doctor with E-DOC</h1>
 
                 <hr />
-                <div className="row" style={{ marginTop: '10%' }}>
+                <div className="row" style={{ marginTop: '5%' }}>
 
-                    <div style={{ backgroundImage: "url('https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=325&dpr=1')" }} className="col-md-3">
-                        <br /><br /><br /><br /><br /><br /><br />
-
-                        <Button style={{ textAlign: 'center', backgroundColor: 'white', color: 'black', fontSize: '20px' }} onClick={this.goToForm} > <b>Book Now !  </b></Button>
-
-                    </div>
-
-                    <div className="col-md-9">
-
+                    <div className="col-md-12">
 
                         <div className="slide-container" style={{ width: 'auto', height: 'auto', marginRight: '5%', marginLeft: '5%' }}>
 
@@ -112,7 +106,20 @@ export default class Home extends React.Component {
                                         <h1 style={{ fontFamily: 'cursive' }}>Invoice will be added to your Google Drive</h1>
                                     </div>
                                 </div>
+                                <div className="each-slide">
+                                    <div style={{ 'backgroundImage': `url(${slideImages[3]})`, width: '100%', height: '10cm', objectFit: "inherit" }}>
+                                        <br /><br /><br /><br /><br /><br />
+                                        <h3 style={{ fontFamily: 'cursive' }}>Stay Safe</h3>
+                                        <h1 style={{ fontFamily: 'cursive' }}>Wear Mask :)</h1>
+                                    </div>
+                                </div>
                             </Slide>
+                            <br/>
+                            <br/>
+
+                            <hr/>
+                            <Button style={{ textAlign: 'center', backgroundColor: 'white', color: 'black', fontSize: '20px' }} onClick={this.goToForm} > <b>Book Now !  </b></Button>
+
                         </div>
 
                     </div>

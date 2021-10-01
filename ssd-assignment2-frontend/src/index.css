@@ -1,9 +1,11 @@
 body {
   margin: 0;
+  font-size: clamp(1rem, 1.2vw, 2rem);
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

@@ -77,7 +77,7 @@ const uploadToGoogleDrive = (fileData) => {
 
     /* File name can be set here. */
     let metadata = {
-        name: `e-doc-channelling-receipt.png`
+        name: `e-doc-channelling-receipt.pdf`
     };
 
     /* get the access token from the gapi. */

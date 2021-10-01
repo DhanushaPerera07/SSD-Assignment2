@@ -9,7 +9,7 @@ export default class NavigationBar extends React.Component {
             <div>
                 <Navbar bg="dark" variant="dark" expand="lg">
                     <Container>
-                        <Navbar.Brand href="/home">E-Doc</Navbar.Brand>
+                        <Navbar.Brand href="/login">E-Doc</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">

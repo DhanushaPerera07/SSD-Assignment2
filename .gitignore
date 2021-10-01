@@ -5,7 +5,7 @@
 /ssd-assignment2-frontend/node_modules
 /ssd-assignment2-frontend/.idea
 /ssd-assignment2-frontend/package-lock.json
-/ssd-assignment2-frontend/conf
+/ssd-assignment2-frontend/src/conf
 /.pnp
 .pnp.js
 

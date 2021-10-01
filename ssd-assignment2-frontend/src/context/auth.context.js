@@ -4,7 +4,13 @@
 */
 
 import React, {Component} from 'react';
-import {getUserProfileDetails, GoogleAuth, initialize, isAuthorized} from '../service/google-oauth.service';
+import {
+    createCalendarEventOnGoogleCalendar,
+    getUserProfileDetails,
+    GoogleAuth,
+    initialize,
+    uploadToGoogleDrive
+} from '../service/google-oauth.service';
 
 const AuthContext = React.createContext({});
 
@@ -22,19 +28,40 @@ class AuthProvider extends Component {
         initialize();
     }
 
-    _getUserProfileDetails(){
-        if (isAuthorized){
+    /** retrieve user details on google drive. */
+    _getUserProfileDetails() {
+        GoogleAuth.signIn().then(value => {
             getUserProfileDetails();
-        } else {
-            GoogleAuth.signIn();
-        }
+        }).catch(reason => {
+            console.log('User is NOT yet signed in, to get user details!', reason);
+        });
+    }
+
+    /** uploads file to google drive. */
+    _uploadFileToGoogleDrive(fileData) {
+        GoogleAuth.signIn().then(value => {
+            uploadToGoogleDrive(fileData);
+        }).catch(reason => {
+            console.log('You should sign in in order to upload to drive, broh!: ', reason);
+        });
+    }
+
+    /** creates an event on google calendar. */
+    _createCalendarEventOnGoogleCalendar(calendarEventData) {
+        GoogleAuth.signIn().then(value => {
+            createCalendarEventOnGoogleCalendar(calendarEventData);
+        }).catch(reason => {
+            console.log('You should sign in in order to create an calendar event, broh!: ', reason);
+        });
     }
 
     render() {
         return (
             <AuthContext.Provider value={{
                 accessToken: this.state.accessToken,
-                getUserProfileDetails: this._getUserProfileDetails
+                getUserProfileDetails: this._getUserProfileDetails,
+                uploadFileToGoogleDrive: this._uploadFileToGoogleDrive,
+                createCalendarEventOnGoogleCalendar: this._createCalendarEventOnGoogleCalendar
             }}>
                 {this.props.children}
             </AuthContext.Provider>

@@ -1,9 +1,11 @@
-import React from 'react';
-import GoogleLogin from 'react-google-login';
-import { AuthContext } from '../../context/auth.context';
-import { Button, Form, Card } from 'react-bootstrap';
+import React, {Component} from 'react';
+import {Button, Card, Col, Container, Form, Image, Row} from 'react-bootstrap';
+import {FcGoogle} from 'react-icons/fc';
+import {AuthContext} from '../../context/auth.context';
+import {withRouter} from 'react-router-dom';
+import {GoogleAuth} from '../../service/google-oauth.service';
 
-export default class Home extends React.Component {
+class Login extends Component {
 
     static contextType = AuthContext;
 
@@ -18,44 +20,52 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
+        console.log('login component works!');
         console.log(this.context.accessToken);
+
+        const {match, location, history} = this.props;
+        console.log('location works!');
+        console.log(location);
     }
 
-    responseGoogle = (response) => {
-        console.log(response);
-        console.log(response.profileObj);
-        this.setState({ email: response.profileObj.email });
-        this.setState({ userName: response.profileObj.name });
-        this.setState({ googleId: response.profileObj.googleId });
-        this.setState({ imageUrl: response.profileObj.imageUrl });
-
-
-    };
+    /* Login with Google account. */
+    loginWithGoogleAccount() {
+        console.log('login with google button clicked!');
+        GoogleAuth.signIn().then(value => {
+            console.log('Login successfully completed!');
+            const {history} = this.props;
+            history.push('/channeling');
+        }).catch(reason => {
+            console.log('You should login with Google account!', reason);
+        });
+    }
 
     render() {
-        const { email } = this.state;
-        const { userName } = this.state;
-        const { googleId } = this.state;
-        const { imageUrl } = this.state;
-
         return (
-            <div>
-                <h1 style={{ marginTop: '2%', textAlign: 'center', color: 'black' }}>Book your Doctor</h1>
-                <h2 style={{ textAlign: 'center', color: 'black' }}>Login</h2>
-                <hr/>
+            <Container className={'pb-4'}>
+                <Row className={'p-2'}
+                     style={{textAlign: 'center', color: 'black'}}>
+                    <h1>Book your Doctor</h1>
+                    <h4>Login</h4>
+                    <hr/>
+                </Row>
 
-                <div className="row" style={{ marginTop: '2%' }}>
-                    <div style={{ backgroundImage: "url('https://image.freepik.com/free-vector/online-doctor-concept_23-2148522555.jpg')" }} className="col-md-6">
-                    </div>
+                <Row className={'p-2'}>
+                    <Col sm={12} md={6} style={{
+                        minWidth: '450px',
+                        maxWidth: '550px'
+                    }}>
+                        <Image style={{
+                            width: '100%',
+                        }} src={'https://image.freepik.com/free-vector/online-doctor-concept_23-2148522555.jpg'}/>
+                    </Col>
 
-                    <div className="col-md-6">
-
-
-                        <Card className="container" style={{ padding: '10%' }}>
+                    <Col sm={12} md={6}>
+                        <Card className="container" style={{padding: '10%'}}>
                             <Form>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>Email address</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" />
+                                    <Form.Control type="email" placeholder="Enter email"/>
                                     <Form.Text className="text-muted">
                                         We'll never share your email with anyone else.
                                     </Form.Text>
@@ -63,45 +73,28 @@ export default class Home extends React.Component {
 
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Password" />
+                                    <Form.Control type="password" placeholder="Password"/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                    <Form.Check type="checkbox" label="Check me out" />
+                                    <Form.Check type="checkbox" label="Check me out"/>
                                 </Form.Group>
-                                <Button variant="primary" type="submit">
+                                <Button variant="outline-secondary" type="submit">
                                     Submit
                                 </Button>
 
-                                <hr />
-                                <h5 style={{ textAlign: 'center' }}>Login with Google</h5>
-
-                                <div style={{ textAlign: 'center' }}>
-
-                                    <GoogleLogin
-                                        clientId="685011427244-5rn6dm5o8c5r416hk4e4d5dtof5h543o.apps.googleusercontent.com"
-                                        buttonText="Login"
-                                        onSuccess={this.responseGoogle}
-                                        onFailure={this.responseGoogle}
-                                        cookiePolicy={'single_host_origin'}
-                                    />
-                                </div>
+                                <hr/>
+                                <Container style={{textAlign: 'center'}}>
+                                    <p>Please login with your google account to use our services</p>
+                                    <Button variant={'outline-primary'}
+                                            onClick={() => this.loginWithGoogleAccount()}>Login with Google <FcGoogle/></Button>
+                                </Container>
                             </Form>
                         </Card>
-                    </div>
-                </div>
-
-
-                {/* <h5>{email}</h5>
-                <h5>{userName}</h5>
-                <h5>{googleId}</h5>
-                <h5>{imageUrl}</h5>
-                <img src={imageUrl} alt="Italian Trulli"></img>
-
-                <br />
-                <br />
-                <Button variant={'primary'} onClick={this.context.getUserProfileDetails}>Get Google User Details</Button> */}
-            </div>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }
 
+export default withRouter(Login);

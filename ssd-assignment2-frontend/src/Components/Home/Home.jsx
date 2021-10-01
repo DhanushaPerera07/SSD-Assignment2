@@ -2,6 +2,28 @@ import React from 'react';
 import GoogleLogin from 'react-google-login';
 import { AuthContext } from '../../context/auth.context';
 import { Button, Form, Card } from 'react-bootstrap';
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
+
+
+const slideProperties = {
+    duration: 2500,
+    scale: 0.8,
+    arrows: false
+}
+
+// const slideImages = [
+//     'https://forum.facmedicine.com/data/MetaMirrorCache/332b15b692202b36ce9b0241f6efb722.jpg',
+//     'https://www.gericare.in/static/images/services/doctorvist.jpg',
+//     'https://www.beaumont.org/images/default-source/primary-care/doctors.jpg?sfvrsn=9571e2e2_0'
+
+// ];
+
+const slideImages = [
+    'https://images.unsplash.com/photo-1491895200222-0fc4a4c35e18?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNhbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
+    'https://images.unsplash.com/photo-1491895200222-0fc4a4c35e18?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNhbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
+    'https://images.unsplash.com/photo-1491895200222-0fc4a4c35e18?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNhbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80'
+];
 
 export default class Home extends React.Component {
 
@@ -33,8 +55,8 @@ export default class Home extends React.Component {
 
     };
 
-    goToForm(){
-        window.location='/channeling';
+    goToForm() {
+        window.location = '/channeling';
     }
 
     render() {
@@ -44,69 +66,58 @@ export default class Home extends React.Component {
         const { imageUrl } = this.state;
 
         return (
-            <div>
-                {/* <div className="row" style={{ marginTop: '10%' }}>
-                    <div className="col-md-4"></div>
+            <div style={{ textAlign: 'center', height: '500px' }}>
 
-                    <div className="col-md-4">
+                <br />        
+                <br />
+                <br />
 
-                        <h1 style={{ textAlign: 'center' }}>Book your Doctor</h1>
-                        <h2 style={{ textAlign: 'center' }}>Login</h2>
-                        <Card className="container" style={{ padding: '10%' }}>
-                            <Form>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>Email address</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" />
-                                    <Form.Text className="text-muted">
-                                        We'll never share your email with anyone else.
-                                    </Form.Text>
-                                </Form.Group>
 
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Password" />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                    <Form.Check type="checkbox" label="Check me out" />
-                                </Form.Group>
-                                <Button variant="primary" type="submit">
-                                    Submit
-                                </Button>
+                <h1 style={{ fontFamily: 'cursive' }}>Book your Doctor with E-DOC</h1>
 
-                                <hr />
-                                <h5 style={{ textAlign: 'center' }}>Login with Google</h5>
+                <hr />
+                <div className="row" style={{ marginTop: '10%' }}>
 
-                                <div style={{textAlign:'center'}}>
+                    <div style={{ backgroundImage: "url('https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=325&dpr=1')" }} className="col-md-3">
+                        <br /><br /><br /><br /><br /><br /><br />
 
-                                    <GoogleLogin
-                                        clientId="685011427244-5rn6dm5o8c5r416hk4e4d5dtof5h543o.apps.googleusercontent.com"
-                                        buttonText="Login"
-                                        onSuccess={this.responseGoogle}
-                                        onFailure={this.responseGoogle}
-                                        cookiePolicy={'single_host_origin'}
-                                    />
-                                </div>
-                            </Form>
-                        </Card>
+                        <Button style={{ textAlign: 'center', backgroundColor: 'white', color: 'black', fontSize: '20px' }} onClick={this.goToForm} > <b>Book Now !  </b></Button>
+
                     </div>
-                </div> */}
 
-                {/* 
-                <h5>{email}</h5>
-                <h5>{userName}</h5>
-                <h5>{googleId}</h5>
-                <h5>{imageUrl}</h5>
-                <img src={imageUrl} alt="Italian Trulli"></img>
+                    <div className="col-md-9">
 
-                <br />
-                <br />
-                <Button variant={'primary'} onClick={this.context.getUserProfileDetails}>Get Google User Details</Button>
- */}
 
-                <div style={{textAlign:'center', marginTop:'10%'}}>
-                <Button variant={'primary'} onClick={this.goToForm} >Book my Doctor Now</Button>
+                        <div className="slide-container" style={{ width: 'auto', height: 'auto', marginRight: '5%', marginLeft: '5%' }}>
 
+                            <Slide  {...slideProperties}>
+                                <div className="each-slide">
+                                    <div style={{ 'backgroundImage': `url(${slideImages[0]})`, width: '100%', height: '10cm', objectFit: "inherit", textAlign: "center" }}>
+                                        <br /><br /><br /><br /><br /><br />
+                                        <h3 style={{ fontFamily: 'cursive' }}>Step 1</h3>
+                                        <h1 style={{ fontFamily: 'cursive' }}>Book your Doctor here</h1>
+                                    </div>
+                                </div>
+                                <div className="each-slide">
+                                    <div style={{ 'backgroundImage': `url(${slideImages[1]})`, width: '100%', height: '10cm', objectFit: "inherit", textAlign: "center" }}>
+                                        <br /><br /><br /><br /><br /><br />
+                                        <h3 style={{ fontFamily: 'cursive' }}>Step 2</h3>
+                                        <h1 style={{ fontFamily: 'cursive' }}>Find your bookins on your Google Calendar</h1>
+                                    </div>
+                                </div>
+                                <div className="each-slide">
+                                    <div style={{ 'backgroundImage': `url(${slideImages[2]})`, width: '100%', height: '10cm', objectFit: "inherit" }}>
+                                        <br /><br /><br /><br /><br /><br />
+                                        <h3 style={{ fontFamily: 'cursive' }}>Step 3</h3>
+                                        <h1 style={{ fontFamily: 'cursive' }}>Invoice will be added to your Google Drive</h1>
+                                    </div>
+                                </div>
+                            </Slide>
+                        </div>
+
+                    </div>
                 </div>
+
 
             </div>
         );

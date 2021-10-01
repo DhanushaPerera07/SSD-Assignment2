@@ -9,7 +9,6 @@ export default class Home extends React.Component {
 
     constructor(props) {
         super(props);
-        this.goToForm = this.goToForm.bind(this);
         this.state = {
             email: null,
             userName: null,
@@ -33,10 +32,6 @@ export default class Home extends React.Component {
 
     };
 
-    goToForm(){
-        window.location='/channeling';
-    }
-
     render() {
         const { email } = this.state;
         const { userName } = this.state;
@@ -45,7 +40,7 @@ export default class Home extends React.Component {
 
         return (
             <div>
-                {/* <div className="row" style={{ marginTop: '10%' }}>
+                <div className="row" style={{ marginTop: '10%' }}>
                     <div className="col-md-4"></div>
 
                     <div className="col-md-4">
@@ -89,10 +84,10 @@ export default class Home extends React.Component {
                             </Form>
                         </Card>
                     </div>
-                </div> */}
+                </div>
 
-                {/* 
-                <h5>{email}</h5>
+
+                {/* <h5>{email}</h5>
                 <h5>{userName}</h5>
                 <h5>{googleId}</h5>
                 <h5>{imageUrl}</h5>
@@ -100,14 +95,7 @@ export default class Home extends React.Component {
 
                 <br />
                 <br />
-                <Button variant={'primary'} onClick={this.context.getUserProfileDetails}>Get Google User Details</Button>
- */}
-
-                <div style={{textAlign:'center', marginTop:'10%'}}>
-                <Button variant={'primary'} onClick={this.goToForm} >Book my Doctor Now</Button>
-
-                </div>
-
+                <Button variant={'primary'} onClick={this.context.getUserProfileDetails}>Get Google User Details</Button> */}
             </div>
         );
     }

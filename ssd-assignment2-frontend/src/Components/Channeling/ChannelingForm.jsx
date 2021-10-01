@@ -108,12 +108,12 @@ export default class ChannelingForm extends Component {
        
         return (
             <div>
-                <h1 style={{ marginTop: '5%' }}>Enter patient's details</h1>
+                <h1 style={{ marginTop: '5%', textAlign:'center' }}>Enter patient's details</h1>
                 <hr></hr>
                 <div className="row">
                     <div className="col-md-4"></div>
                     <div className="col-md-4">
-                        <Card className="container">
+                        <Card className="container" style={{marginBottom:'10%'}}>
                             <br />
                             <Form >
                                 <Form.Group className="mb-3" controlId="formBasicName">

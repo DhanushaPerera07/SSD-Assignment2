@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
-import {AuthContext} from '../../context/auth.context';
+import { AuthContext } from '../../context/auth.context';
 
 export default class ChannelingForm extends Component {
 
@@ -102,28 +102,35 @@ export default class ChannelingForm extends Component {
         })
     }
 
-    
+
 
     render() {
-       
+
         return (
             <div>
-                <h1 style={{ marginTop: '5%', textAlign:'center' }}>Enter patient's details</h1>
+                <h1 style={{ marginTop: '5%', textAlign: 'center' }}>Enter patient's details</h1>
                 <hr></hr>
                 <div className="row">
                     <div className="col-md-4"></div>
                     <div className="col-md-4">
-                        <Card className="container" style={{marginBottom:'10%'}}>
+                        <Card className="container" style={{ marginBottom: '10%' }}>
                             <br />
                             <Form >
                                 <Form.Group className="mb-3" controlId="formBasicName">
-                                    <Form.Label>Summary</Form.Label>
+                                    <Form.Label>Subject</Form.Label>
                                     <Form.Control type="text" name="summary" placeholder="Enter Summary" value={this.state.summary} onChange={this.onChange} />
                                 </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicAge">
-                                    <Form.Label>location</Form.Label>
-                                    <Form.Control type="text" name="location" placeholder="Enter location" value={this.state.location} onChange={this.onChange} />
+                                <Form.Group controlId="formBasicDelivery">
+                                    <Form.Label >Select a Hospital</Form.Label> <br></br>
+                                    <Form.Control name="doctorName" as="select"
+                                        custom className="form-control" value={this.state.doctorName} onChange={this.onChange}
+                                    >
+                                        <option value="Select">Select a Hospital</option>
+                                        <option value="janakachinthana1@gmail.com">Asiri Hospital</option>
+                                        <option value="janakachinthana1@gmail.com">Lanka Hospital</option>
+                                    </Form.Control>
                                 </Form.Group>
+                                <br></br>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>description</Form.Label>
                                     <Form.Control type="text" name="description" placeholder="Enter description" value={this.state.description} onChange={this.onChange} />

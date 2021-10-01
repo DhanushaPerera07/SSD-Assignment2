@@ -40,13 +40,17 @@ export default class Home extends React.Component {
 
         return (
             <div>
-                <div className="row" style={{ marginTop: '10%' }}>
-                    <div className="col-md-4"></div>
+                <h1 style={{ marginTop: '2%', textAlign: 'center', color: 'black' }}>Book your Doctor</h1>
+                <h2 style={{ textAlign: 'center', color: 'black' }}>Login</h2>
+                <hr/>
 
-                    <div className="col-md-4">
+                <div className="row" style={{ marginTop: '2%' }}>
+                    <div style={{ backgroundImage: "url('https://image.freepik.com/free-vector/online-doctor-concept_23-2148522555.jpg')" }} className="col-md-6">
+                    </div>
 
-                        <h1 style={{ textAlign: 'center' }}>Book your Doctor</h1>
-                        <h2 style={{ textAlign: 'center' }}>Login</h2>
+                    <div className="col-md-6">
+
+
                         <Card className="container" style={{ padding: '10%' }}>
                             <Form>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -71,7 +75,7 @@ export default class Home extends React.Component {
                                 <hr />
                                 <h5 style={{ textAlign: 'center' }}>Login with Google</h5>
 
-                                <div style={{textAlign:'center'}}>
+                                <div style={{ textAlign: 'center' }}>
 
                                     <GoogleLogin
                                         clientId="685011427244-5rn6dm5o8c5r416hk4e4d5dtof5h543o.apps.googleusercontent.com"

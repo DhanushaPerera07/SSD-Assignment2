@@ -116,11 +116,11 @@ class Report extends Component {
                         {(this.props.uploadFiles) ? (
                             <Col sm={12}>
                                 <Image id={'payslip_image'} style={
-                                {
-                                    maxWidth: '100%'
-                                }
-                            } src={URL.createObjectURL(this.props.uploadFiles)}
-                                        alt={'Pay slip should be uploaded'}/></Col>
+                                    {
+                                        maxWidth: '100%'
+                                    }
+                                } src={URL.createObjectURL(this.props.uploadFiles)}
+                                       alt={'Pay slip should be uploaded'}/></Col>
                         ) : (<Col>
                             <p>No Payment Done</p>
                         </Col>)}

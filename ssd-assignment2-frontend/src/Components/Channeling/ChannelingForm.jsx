@@ -54,22 +54,20 @@ export default class ChannelingForm extends Component {
         // create let event;
         let calendarEvent = {
             'summary': this.state.summary,
-            'location': this.state.location,
+            'location': "Asiri Hospital",
             'description': this.state.description,
             'start': {
-                'dateTime': '2021-09-29T09:00:00-07:00',
+                'dateTime': '2021-10-04T09:00:00-07:00',
                 'timeZone': 'America/Los_Angeles'
             },
             'end': {
-                'dateTime': '2021-09-30T17:00:00-07:00',
+                'dateTime': '2021-10-04T17:00:00-07:00',
                 'timeZone': 'America/Los_Angeles'
             },
             'recurrence': [
                 'RRULE:FREQ=DAILY;COUNT=2'
             ],
             'attendees': [
-                { 'email': 'menuradewalegama@gmail.com' },
-                { 'email': 'sachinthazoysa@gmail.com' },
                 { 'email': this.state.email }
             ],
             'reminders': {
@@ -102,52 +100,22 @@ export default class ChannelingForm extends Component {
                                     <Form.Control type="text" name="summary" placeholder="Enter Summary"
                                         value={this.state.summary} onChange={this.onChange} />
                                 </Form.Group>
-                                <Form.Group controlId="formBasicDelivery">
-                                    <Form.Label>Select a Hospital</Form.Label> <br></br>
-                                    <Form.Control name="doctorName" as="select"
-                                        custom className="form-control" value={this.state.doctorName}
-                                        onChange={this.onChange}
-                                    >
-                                        <option value="Select">Select a Hospital</option>
-                                        <option value="janakachinthana1@gmail.com">Asiri Hospital</option>
-                                        <option value="janakachinthana1@gmail.com">Lanka Hospital</option>
-                                    </Form.Control>
-                                </Form.Group>
-                                <br></br>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>description</Form.Label>
                                     <Form.Control type="text" name="description" placeholder="Enter description"
                                         value={this.state.description} onChange={this.onChange} />
                                 </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicAge">
-                                    <Form.Label>Time from</Form.Label>
-                                    <Form.Control type="datetime-local" name="startDatetime" ref={(startDateTime) => {
-                                        this.dateRef = startDateTime;
-                                    }} value={this.state.startDateTime} onChange={this._onStartDateChange} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicAge">
-                                    <Form.Label>Time to</Form.Label>
-                                    <Form.Control type="datetime-local" name="endDatetime" ref={(endDatetime) => {
-                                        this.dateRef = endDatetime;
-                                    }} value={this.state.endDatetime} onChange={this._onEndDateChange} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicAge">
-                                    <Form.Label>Patient Email</Form.Label>
-                                    <Form.Control type="email" name="email" placeholder="Enter email"
-                                        value={this.state.email} onChange={this.onChange} />
-                                </Form.Group>
                                 <Form.Group controlId="formBasicDelivery">
                                     <Form.Label>Select a Doctor</Form.Label> <br></br>
-                                    <Form.Control name="doctorName" as="select"
-                                        custom className="form-control" value={this.state.doctorName}
+                                    <Form.Control name="email" as="select"
+                                        custom className="form-control" value={this.state.email}
                                         onChange={this.onChange}
                                     >
                                         <option value="Select">Select a Doctor</option>
-
                                         <option value="janakachinthana1@gmail.com">Dr. Janaka Dissanayake</option>
-                                        <option value="Menura">Dr. Menura Dewalegama</option>
-                                        <option value="Danusha">Dr. Danusha Perera</option>
-                                        <option value="Sachintha">Dr. Sachintha de Zoysa</option>
+                                        <option value="menuradewalegama@gmail.com">Dr. Menura Dewalegama</option>
+                                        <option value="Buddhika.Dhanusha@gmail.com">Dr. Danusha Perera</option>
+                                        <option value="sachinthazoysa@gmail.com">Dr. Sachintha de Zoysa</option>
                                     </Form.Control>
                                 </Form.Group>
                                 <br></br>

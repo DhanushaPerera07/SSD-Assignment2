@@ -13,12 +13,12 @@ export default class Main extends Component {
             <Container>
                 <div>
                     <Switch>
-                        <Redirect exact from="/" to="/"/>
+                        {/* <Redirect exact from="/login" to="/"/> */}
+                        <Route exact path="/">
+                            <Home/>
+                        </Route>
                         <Route exact path="/login">
                             <Login/>
-                        </Route>
-                        <Route exact path="/home">
-                            <Home/>
                         </Route>
                         <Route path="/channeling">
                             <ChannelingForm/>

@@ -24,7 +24,7 @@ export default class Home extends React.Component {
 
     constructor(props) {
         super(props);
-        this.goToForm = this.goToForm.bind(this);
+        this.goToLogin = this.goToLogin.bind(this);
         this.state = {
             email: null,
             userName: null,
@@ -37,8 +37,8 @@ export default class Home extends React.Component {
         console.log(this.context.accessToken);
     }
 
-    goToForm() {
-        window.location = '/channeling';
+    goToLogin() {
+        window.location = '/login';
     }
 
     render() {
@@ -123,7 +123,7 @@ export default class Home extends React.Component {
                                 backgroundColor: 'white',
                                 color: 'black',
                                 fontSize: '20px'
-                            }} onClick={this.goToForm}> <b>Book Now ! </b></Button>
+                            }} onClick={this.goToLogin}> <b>Book Now ! </b></Button>
 
                         </div>
 

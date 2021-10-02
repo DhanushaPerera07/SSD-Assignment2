@@ -111,8 +111,11 @@ const createCalendarEventOnGoogleCalendar = (calendarEventData) => {
         'resource': calendarEventData
     });
 
+
+    //change window location
     request.execute(event => {
-        window.open(event.htmlLink);
+        window.location='/uploads'
+        // window.open(event.htmlLink);
     });
 };
 

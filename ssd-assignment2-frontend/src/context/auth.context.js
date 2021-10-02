@@ -9,6 +9,7 @@ import {
     getUserProfileDetails,
     GoogleAuth,
     initialize,
+    isAuthorized,
     uploadToGoogleDrive
 } from '../service/google-oauth.service';
 
@@ -19,7 +20,7 @@ class AuthProvider extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            accessToken: 'This is a testing access token'
+            accessToken: null
         };
     }
 
@@ -31,7 +32,13 @@ class AuthProvider extends Component {
     /** retrieve user details on google drive. */
     _getUserProfileDetails() {
         GoogleAuth.signIn().then(value => {
+            console.log(value);
             getUserProfileDetails();
+            // TODO: find the error
+            // this.setState((prevState)=>{
+            //     prevState.accessToken = isAuthorized;
+            //     return prevState;
+            // });
         }).catch(reason => {
             console.log('User is NOT yet signed in, to get user details!', reason);
         });

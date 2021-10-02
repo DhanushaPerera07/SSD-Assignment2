@@ -116,9 +116,21 @@ const createCalendarEventOnGoogleCalendar = (calendarEventData) => {
     });
 };
 
+const getGoogleAuth = () => {
+    return new Promise((resolve, reject) => {
+        if(GoogleAuth){
+            console.log('GoogleAuth should not truthy!');
+            resolve(GoogleAuth);
+        } else {
+            reject(null);
+        }
+    });
+}
+
 export {
     gapi,
     GoogleAuth,
+    getGoogleAuth,
     currentUser,
     isAuthorized,
     initialize,

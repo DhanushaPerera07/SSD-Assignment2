@@ -33,6 +33,7 @@ class Login extends Component {
         console.log('login with google button clicked!');
         GoogleAuth.signIn().then(value => {
             console.log('Login successfully completed!');
+            this.context.getUserProfileDetails();
             const {history} = this.props;
             history.push('/channeling');
         }).catch(reason => {

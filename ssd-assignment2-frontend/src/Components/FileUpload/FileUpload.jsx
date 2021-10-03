@@ -20,6 +20,8 @@ class FileUpload extends Component {
     }
 
     componentDidMount() {
+        console.log('FileUpload componentDidMount works!');
+        console.log(this.context.getChannelingDetails());
     }
 
     /** Listen to the file upload input field. */

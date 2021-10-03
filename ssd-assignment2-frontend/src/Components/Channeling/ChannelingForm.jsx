@@ -46,6 +46,8 @@ export default class ChannelingForm extends Component {
     handleClick() {
         this.context.GoogleAuth.signIn().then(value => {
             this.context.createCalendarEventOnGoogleCalendar(this.createEventData());
+            /* Set channeling details to context */
+            this.context.setChannelingDetail(this.state);
         }).catch(reason => {
             console.log('Please sign into the application', reason);
         });

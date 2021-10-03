@@ -23,7 +23,8 @@ class AuthProvider extends Component {
             GoogleAuth: null,
             isAuthorized: false,
             currentApiRequest: null,
-            currentUser: null
+            currentUser: null,
+            channelingDetails: null
         };
     }
 
@@ -124,6 +125,17 @@ class AuthProvider extends Component {
         });
     }
 
+    _setChannelingDetails(channelingDetails){
+        this.setState(prevState=> {
+            prevState.channelingDetails = channelingDetails;
+            return prevState;
+        });
+    }
+
+    _getChannelingDetails(){
+        return this.state.channelingDetails;
+    }
+
     render() {
         return (
             <AuthContext.Provider value={{
@@ -133,7 +145,9 @@ class AuthProvider extends Component {
                 setAccessToken: this._setAccessToken.bind(this),
                 getUserProfileDetails: this._getUserProfileDetails.bind(this),
                 uploadFileToGoogleDrive: this._uploadFileToGoogleDrive.bind(this),
-                createCalendarEventOnGoogleCalendar: this._createCalendarEventOnGoogleCalendar.bind(this)
+                createCalendarEventOnGoogleCalendar: this._createCalendarEventOnGoogleCalendar.bind(this),
+                setChannelingDetail: this._setChannelingDetails.bind(this),
+                getChannelingDetails: this._getChannelingDetails.bind(this)
             }}>
                 {this.props.children}
             </AuthContext.Provider>

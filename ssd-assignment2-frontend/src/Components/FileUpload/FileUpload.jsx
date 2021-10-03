@@ -40,7 +40,7 @@ class FileUpload extends Component {
             try {
                 const file = await this.createPDF();
                 this.context.uploadFileToGoogleDrive(file);
-                window.location='/home'
+                window.location='/'
             } catch (e) {
                 console.error('Something went wrong when PDF file is generating!', e);
             }

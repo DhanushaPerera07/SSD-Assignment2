@@ -2,9 +2,9 @@
 @author : Dhanusha Perera
 @date : 29/09/2021
 */
-import React, {Component} from 'react';
-import {Button, Container, Form} from 'react-bootstrap';
-import {AuthContext} from '../../context/auth.context';
+import React, { Component } from 'react';
+import { Button, Container, Form, Image, Row, Col } from 'react-bootstrap';
+import { AuthContext } from '../../context/auth.context';
 import Report from '../Report/Report';
 
 class FileUpload extends Component {
@@ -40,6 +40,7 @@ class FileUpload extends Component {
             try {
                 const file = await this.createPDF();
                 this.context.uploadFileToGoogleDrive(file);
+                window.location='/home'
             } catch (e) {
                 console.error('Something went wrong when PDF file is generating!', e);
             }
@@ -61,9 +62,9 @@ class FileUpload extends Component {
             let opt = {
                 margin: 1,
                 filename: 'myfile.pdf',
-                image: {type: 'jpeg', quality: 0.95},
-                html2canvas: {scale: 2, useCORS: true},
-                jsPDF: {unit: 'in', format: 'a4', orientation: 'portrait'}
+                image: { type: 'jpeg', quality: 0.95 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
 
             try {
@@ -81,48 +82,53 @@ class FileUpload extends Component {
             <Container style={{
                 padding: '2rem 0'
             }}>
-                <h4>File Uploading Component works!</h4>
-                <Form>
-                    <Form.Group controlId="formFile" className="mb-3" style={
-                        {
-                            display: 'flex',
-                            flexDirection: 'column'
-                        }
-                    }>
-                        <Form.Label>Upload your payment slip</Form.Label>
-                        <Form.Control type="file"
-                                      accept={'image/png,image/jpeg'}
-                                      onChange={(event) =>
-                                          this.onChangeFileUpload(event)}/>
-                    </Form.Group>
+                <h1 style={{ textAlign: 'center' }}>Get your Invoice generated here!</h1>
+                <hr />
+                <div style={{ textAlign: 'center' }}>
 
-                    <Container style={{
-                        padding: '4rem 0',
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                    }}>
-                        <Button variant="primary" type="button" onClick={
-                            (event) =>
-                                this.uploadGeneratedFileToGoogleDrive(event)}>Upload To Google Drive</Button>
 
-                        {/*<Button variant="secondary" type="button" onClick={
-                            (event) => this.createPDF(event)
-                        }>Generate PDF</Button>*/}
-                    </Container>
-                </Form>
+                    <Row className={'p-2'}>
+                        <Col sm={12} md={6} >
+                            <Image style={{
+                                width: '80%',
+                            }} src={'https://www.pngonly.com/wp-content/uploads/2017/06/free-business-png-10201.png'} />
+                            <Form>
+                                <Form.Group controlId="formFile">
+                                    <Form.Label>Upload your payment slip</Form.Label>
+                                    <br />  <br />
+                                    <Form.Control type="file"
+                                        accept={'image/png,image/jpeg'}
+                                        onChange={(event) =>
+                                            this.onChangeFileUpload(event)} />
+                                </Form.Group>
 
-                <Container style={{
-                    padding: '2rem 0'
-                }}>
-                    {(this.state.uploadFiles) ? (
-                        <Report patientDetails={''}
-                                channelingDetails={''}
-                                paymentDetails={''}
-                                uploadFiles={this.state.uploadFiles}
-                                ref={this.reportComponentRef}/>
-                    ) : ('')}
+                                <br />
+                                <Button variant="primary" type="button" onClick={
+                                    (event) =>
+                                        this.uploadGeneratedFileToGoogleDrive(event)}>Upload To Google Drive</Button>
+                            </Form>
+                        </Col>
+                        <Col sm={12} md={6} >
+                            <Container 
+                        >
+                                {(this.state.uploadFiles) ? (
+                                    <Report patientDetails={''}
+                                        channelingDetails={''}
+                                        paymentDetails={''}
+                                        uploadFiles={this.state.uploadFiles}
+                                        ref={this.reportComponentRef} />
+                                ) : ('')}
 
-                </Container>
+                            </Container>
+
+                        </Col>
+                    </Row>
+
+                    <br />    <br />    <br />    <br />
+
+
+                </div>
+
             </Container>
         );
     }

@@ -22,7 +22,7 @@ class Report extends Component {
 
     render() {
         return (
-            <Container id={'report_component'}>
+            <Container id={'report_component'} style={{border:'5px solid #005ea1', backgroundColor:'#aacbe3'}}>
                 <Row className={'pb-4'}>
                     <Col>
                         <h4>Invoice</h4>

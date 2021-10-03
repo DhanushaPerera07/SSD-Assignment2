@@ -14,14 +14,17 @@ export default class ChannelingForm extends Component {
         this._onStartDateChange = this._onStartDateChange.bind(this);
         this._onEndDateChange = this._onEndDateChange.bind(this);
         this.state = {
-            summary: '',
-            location: '',
+            patientName: '',
+            subject: '',
             description: '',
-            startDateTime: '',
-            endDateTime: '',
-            timeZone: '',
             email: '',
-            doctorName: ''
+            doctorName: 'Dr Janaka Dissanayake',
+            contactNo: '',
+            location: 'Asiri Hospital',
+            startDate: '2021-10-04T09:00:00-07:00',
+            endDate: '2021-10-04T17:00:00-07:00',
+            timeZone: 'America/Los_Angeles'
+
         };
     }
 
@@ -53,16 +56,16 @@ export default class ChannelingForm extends Component {
     createEventData() {
         // create let event;
         let calendarEvent = {
-            'summary': this.state.summary,
-            'location': 'Asiri Hospital',
+            'summary': this.state.subject,
+            'location': this.state.location,
             'description': this.state.description,
             'start': {
-                'dateTime': '2021-10-04T09:00:00-07:00',
-                'timeZone': 'America/Los_Angeles'
+                'dateTime': this.state.startDate,
+                'timeZone': this.state.timeZone
             },
             'end': {
-                'dateTime': '2021-10-04T17:00:00-07:00',
-                'timeZone': 'America/Los_Angeles'
+                'dateTime': this.state.endDate,
+                'timeZone': this.state.timeZone
             },
             'recurrence': [
                 'RRULE:FREQ=DAILY;COUNT=2'
@@ -96,16 +99,26 @@ export default class ChannelingForm extends Component {
                             <br/>
                             <Form>
                                 <Form.Group className="mb-3" controlId="formBasicName">
-                                    <Form.Label>Subject</Form.Label>
-                                    <Form.Control type="text" name="summary" placeholder="Enter Summary"
-                                                  value={this.state.summary} onChange={this.onChange}/>
+                                    <Form.Label>Patient Name</Form.Label>
+                                    <Form.Control type="text" name="patientName" placeholder="Enter patient's name"
+                                                  value={this.state.patientName} onChange={this.onChange}/>
                                 </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicAge">
+                                <Form.Group className="mb-3" controlId="formBasicSubject">
+                                    <Form.Label>Subject</Form.Label>
+                                    <Form.Control type="text" name="subject" placeholder="Enter Summary"
+                                                  value={this.state.subject} onChange={this.onChange}/>
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicDescription">
                                     <Form.Label>description</Form.Label>
                                     <Form.Control type="text" name="description" placeholder="Enter description"
                                                   value={this.state.description} onChange={this.onChange}/>
                                 </Form.Group>
-                                <Form.Group controlId="formBasicDelivery">
+                                <Form.Group className="mb-3" controlId="formBasicContactNo">
+                                    <Form.Label>Contact Number</Form.Label>
+                                    <Form.Control type="text" name="contactNo" placeholder="Enter contact number"
+                                                  value={this.state.contactNo} onChange={this.onChange}/>
+                                </Form.Group>
+                                <Form.Group controlId="formBasicDoctor">
                                     <Form.Label>Select a Doctor</Form.Label> <br></br>
                                     <Form.Control name="email" as="select"
                                                   custom className="form-control" value={this.state.email}
@@ -119,10 +132,6 @@ export default class ChannelingForm extends Component {
                                     </Form.Control>
                                 </Form.Group>
                                 <br></br>
-                                <Form.Group controlId="formFile" className="mb-3">
-                                    <Form.Label>Insert an image of your payment slip</Form.Label><br></br>
-                                    <Form.Control type="file"/>
-                                </Form.Group>
                                 <div className="row">
                                     <Button variant="primary" onClick={this.handleClick}>
                                         Submit

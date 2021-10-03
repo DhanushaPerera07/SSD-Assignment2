@@ -13,7 +13,8 @@ export default class NavigationBar extends Component {
                             <Nav className="me-auto">
                                 {/* <Nav.Link href="/home">Home</Nav.Link>
                                 <Nav.Link href="/channeling">Channeling</Nav.Link>
-                                <Nav.Link href="/uploads">File uploads</Nav.Link> */}
+                                {/* <Nav.Link href="/uploads">File uploads</Nav.Link> */}
+
                             </Nav>
                         </Navbar.Collapse>
                     </Container>

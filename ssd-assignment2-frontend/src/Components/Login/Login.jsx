@@ -86,7 +86,7 @@ class Login extends Component {
                                 <Container style={{textAlign: 'center'}}>
                                     <p>Please login with your google account to use our services</p>
                                     <Button variant={'outline-primary'}
-                                            onClick={() => this.loginWithGoogleAccount()}>Login with Google </Button>
+                                            onClick={() => this.loginWithGoogleAccount()}>Login with Google</Button>
                                 </Container>
                             </Form>
                         </Card>

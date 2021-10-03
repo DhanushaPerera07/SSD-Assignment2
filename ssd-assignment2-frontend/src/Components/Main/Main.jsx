@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Container} from 'react-bootstrap';
-import {Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import ChannelingForm from '../Channeling/ChannelingForm';
@@ -17,36 +17,42 @@ export default class Main extends Component {
     }
 
 
+    AppRoutes() {
+        if (this.context.isAuthorized) {
+            return (
+                <Switch>
+                    <Route exact path="/">
+                        <Home/>
+                    </Route>
+                    <Route exact path="/channeling">
+                        <ChannelingForm/>
+                    </Route>
+                    <Route exact path="/uploads">
+                        {(!this.context.getChannelingDetails()) ? <Redirect to="/channeling" /> : <FileUpload/>}
+                    </Route>
+                </Switch>
+            );
+        }  else {
+
+            return (
+                <Switch>
+                    <Route exact path="/">
+                        <Home/>
+                    </Route>
+                    <Route exact path="/login">
+                        <Login/>
+                    </Route>
+                </Switch>
+            )
+        }
+    }
+
+
     render() {
         return (
             <Container>
                 <div>
-                    <Switch>
-                        {/* <Redirect exact from="/login" to="/"/> */}
-                        <Route exact path="/">
-                            <Home/>
-                        </Route>
-
-                        {
-                            (this.context.isAuthorized) ? (
-                                <>
-                                    <Route path="/channeling">
-                                        <ChannelingForm/>
-                                    </Route>
-                                    <Route path={'/uploads'}>
-                                        <FileUpload/>
-                                    </Route>
-                                </>
-                            ) : (
-                                <>
-                                    <Route exact path="/login">
-                                        <Login/>
-                                    </Route>
-                                </>
-                            )
-                        }
-
-                    </Switch>
+                        {this.AppRoutes()}
                 </div>
             </Container>
         );

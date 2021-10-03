@@ -116,24 +116,34 @@ class AuthProvider extends Component {
     }
 
     /** Creates an event on google calendar. */
-    _createCalendarEventOnGoogleCalendar(calendarEventData) {
+    _createCalendarEventOnGoogleCalendar(calendarEventData, callback) {
         this.state.GoogleAuth.signIn().then(value => {
             /* Need to pass the gapi as the first parameter. */
-            createCalendarEventOnGoogleCalendar(this.state.gapi, calendarEventData);
+            createCalendarEventOnGoogleCalendar(this.state.gapi, calendarEventData, callback);
         }).catch(reason => {
             console.log('You should sign in in order to create an calendar event, broh!: ', reason);
         });
     }
 
-    _setChannelingDetails(channelingDetails){
-        this.setState(prevState=> {
+    /** Setter for channel details. */
+    _setChannelingDetails(channelingDetails) {
+        console.log(channelingDetails);
+        this.setState(prevState => {
             prevState.channelingDetails = channelingDetails;
             return prevState;
         });
     }
 
-    _getChannelingDetails(){
+    /** Retrieve Channel Details. */
+    _getChannelingDetails() {
         return this.state.channelingDetails;
+    }
+
+    /** Log out the user. */
+    _logOut(){
+        if (this.state.GoogleAuth.isSignedIn.get()){
+            this.state.GoogleAuth.signOut();
+        }
     }
 
     render() {
@@ -147,7 +157,8 @@ class AuthProvider extends Component {
                 uploadFileToGoogleDrive: this._uploadFileToGoogleDrive.bind(this),
                 createCalendarEventOnGoogleCalendar: this._createCalendarEventOnGoogleCalendar.bind(this),
                 setChannelingDetail: this._setChannelingDetails.bind(this),
-                getChannelingDetails: this._getChannelingDetails.bind(this)
+                getChannelingDetails: this._getChannelingDetails.bind(this),
+                logOut: this._logOut.bind(this)
             }}>
                 {this.props.children}
             </AuthContext.Provider>

@@ -131,8 +131,8 @@ class AuthProvider extends Component {
                 isAuthorized: this.state.isAuthorized,
                 GoogleAuth: this.state.GoogleAuth,
                 setAccessToken: this._setAccessToken.bind(this),
-                getUserProfileDetails: this._getUserProfileDetails,
-                uploadFileToGoogleDrive: this._uploadFileToGoogleDrive,
+                getUserProfileDetails: this._getUserProfileDetails.bind(this),
+                uploadFileToGoogleDrive: this._uploadFileToGoogleDrive.bind(this),
                 createCalendarEventOnGoogleCalendar: this._createCalendarEventOnGoogleCalendar.bind(this)
             }}>
                 {this.props.children}

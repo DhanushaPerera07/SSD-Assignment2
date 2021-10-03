@@ -34,7 +34,7 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.context.accessToken);
+        // console.log(this.context.accessToken);
     }
 
     goToForm() {

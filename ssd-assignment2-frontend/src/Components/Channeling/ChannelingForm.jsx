@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Button, Card, Form } from 'react-bootstrap';
-import { AuthContext } from '../../context/auth.context';
-import { GoogleAuth, createCalendarEventOnGoogleCalendar } from '../../service/google-oauth.service'
+import React, {Component} from 'react';
+import {Button, Card, Form} from 'react-bootstrap';
+import {AuthContext} from '../../context/auth.context';
+import {createCalendarEventOnGoogleCalendar} from '../../service/google-oauth.service';
 
 export default class ChannelingForm extends Component {
 
@@ -26,7 +26,7 @@ export default class ChannelingForm extends Component {
     }
 
     onChange(event) {
-        this.setState({ [event.target.name]: event.target.value });
+        this.setState({[event.target.name]: event.target.value});
     }
 
     _onStartDateChange(e) {
@@ -42,7 +42,7 @@ export default class ChannelingForm extends Component {
     }
 
     handleClick() {
-        GoogleAuth.signIn().then(value => {
+        this.context.GoogleAuth.signIn().then(value => {
             createCalendarEventOnGoogleCalendar(this.createEventData());
         }).catch(reason => {
             console.log('Please sign into the application', reason);
@@ -54,7 +54,7 @@ export default class ChannelingForm extends Component {
         // create let event;
         let calendarEvent = {
             'summary': this.state.summary,
-            'location': "Asiri Hospital",
+            'location': 'Asiri Hospital',
             'description': this.state.description,
             'start': {
                 'dateTime': '2021-10-04T09:00:00-07:00',
@@ -68,13 +68,13 @@ export default class ChannelingForm extends Component {
                 'RRULE:FREQ=DAILY;COUNT=2'
             ],
             'attendees': [
-                { 'email': this.state.email }
+                {'email': this.state.email}
             ],
             'reminders': {
                 'useDefault': false,
                 'overrides': [
-                    { 'method': 'email', 'minutes': 24 * 60 },
-                    { 'method': 'popup', 'minutes': 10 }
+                    {'method': 'email', 'minutes': 24 * 60},
+                    {'method': 'popup', 'minutes': 10}
                 ]
             }
         };
@@ -87,29 +87,29 @@ export default class ChannelingForm extends Component {
 
         return (
             <div>
-                <h1 style={{ marginTop: '5%', textAlign: 'center' }}>Enter patient's details</h1>
+                <h1 style={{marginTop: '5%', textAlign: 'center'}}>Enter patient's details</h1>
                 <hr></hr>
                 <div className="row">
                     <div className="col-md-4"></div>
                     <div className="col-md-4">
-                        <Card className="container" style={{ marginBottom: '10%' }}>
-                            <br />
+                        <Card className="container" style={{marginBottom: '10%'}}>
+                            <br/>
                             <Form>
                                 <Form.Group className="mb-3" controlId="formBasicName">
                                     <Form.Label>Subject</Form.Label>
                                     <Form.Control type="text" name="summary" placeholder="Enter Summary"
-                                        value={this.state.summary} onChange={this.onChange} />
+                                                  value={this.state.summary} onChange={this.onChange}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicAge">
                                     <Form.Label>description</Form.Label>
                                     <Form.Control type="text" name="description" placeholder="Enter description"
-                                        value={this.state.description} onChange={this.onChange} />
+                                                  value={this.state.description} onChange={this.onChange}/>
                                 </Form.Group>
                                 <Form.Group controlId="formBasicDelivery">
                                     <Form.Label>Select a Doctor</Form.Label> <br></br>
                                     <Form.Control name="email" as="select"
-                                        custom className="form-control" value={this.state.email}
-                                        onChange={this.onChange}
+                                                  custom className="form-control" value={this.state.email}
+                                                  onChange={this.onChange}
                                     >
                                         <option value="Select">Select a Doctor</option>
                                         <option value="janakachinthana1@gmail.com">Dr. Janaka Dissanayake</option>
@@ -121,7 +121,7 @@ export default class ChannelingForm extends Component {
                                 <br></br>
                                 <Form.Group controlId="formFile" className="mb-3">
                                     <Form.Label>Insert an image of your payment slip</Form.Label><br></br>
-                                    <Form.Control type="file" />
+                                    <Form.Control type="file"/>
                                 </Form.Group>
                                 <div className="row">
                                     <Button variant="primary" onClick={this.handleClick}>
@@ -129,7 +129,7 @@ export default class ChannelingForm extends Component {
                                     </Button>
                                 </div>
                             </Form>
-                            <br />
+                            <br/>
                         </Card>
                     </div>
                 </div>

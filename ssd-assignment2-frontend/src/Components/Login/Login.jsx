@@ -3,7 +3,6 @@ import {Button, Card, Col, Container, Form, Image, Row} from 'react-bootstrap';
 // import {FcGoogle} from 'react-icons/fc';
 import {AuthContext} from '../../context/auth.context';
 import {withRouter} from 'react-router-dom';
-import {GoogleAuth} from '../../service/google-oauth.service';
 
 class Login extends Component {
 
@@ -21,19 +20,19 @@ class Login extends Component {
 
     componentDidMount() {
         console.log('login component works!');
-        console.log(this.context.accessToken);
+        // console.log(this.context.accessToken);
 
-        const {match, location, history} = this.props;
-        console.log('location works!');
-        console.log(location);
+        // const {match, location, history} = this.props;
+        // console.log('location works!');
+        // console.log(location);
     }
 
     /* Login with Google account. */
     loginWithGoogleAccount() {
         console.log('login with google button clicked!');
-        GoogleAuth.signIn().then(value => {
+        this.context.GoogleAuth.signIn().then(value => {
             console.log('Login successfully completed!');
-            this.context.getUserProfileDetails();
+            // this.context.getUserProfileDetails();
             const {history} = this.props;
             history.push('/channeling');
         }).catch(reason => {

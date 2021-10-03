@@ -52,6 +52,8 @@ const uploadToGoogleDrive = (gapi, fileData) => {
 const createCalendarEventOnGoogleCalendar = (gapi, calendarEventData) => {
     console.log('execute create calender event on google calender!');
 
+    console.log(gapi);
+
     let request = gapi.client.calendar.events.insert({
         'calendarId': 'primary',
         'resource': calendarEventData

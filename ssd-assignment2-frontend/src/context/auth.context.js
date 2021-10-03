@@ -133,7 +133,7 @@ class AuthProvider extends Component {
                 setAccessToken: this._setAccessToken.bind(this),
                 getUserProfileDetails: this._getUserProfileDetails,
                 uploadFileToGoogleDrive: this._uploadFileToGoogleDrive,
-                createCalendarEventOnGoogleCalendar: this._createCalendarEventOnGoogleCalendar
+                createCalendarEventOnGoogleCalendar: this._createCalendarEventOnGoogleCalendar.bind(this)
             }}>
                 {this.props.children}
             </AuthContext.Provider>

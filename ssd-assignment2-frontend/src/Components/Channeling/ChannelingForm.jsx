@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Button, Card, Form} from 'react-bootstrap';
 import {AuthContext} from '../../context/auth.context';
+import {withRouter} from 'react-router-dom';
 
-export default class ChannelingForm extends Component {
+class ChannelingForm extends Component {
 
     static contextType = AuthContext;
 
@@ -45,13 +46,19 @@ export default class ChannelingForm extends Component {
 
     handleClick() {
         this.context.GoogleAuth.signIn().then(value => {
-            this.context.createCalendarEventOnGoogleCalendar(this.createEventData());
+            this.context.createCalendarEventOnGoogleCalendar(this.createEventData(), () => {
+                const { history } = this.props;
+                history.push('/uploads');
+            });
+            /* Set channeling details to context */
+            this.context.setChannelingDetail(this.state);
         }).catch(reason => {
             console.log('Please sign into the application', reason);
         });
 
     }
 
+    /** Create event data. */
     createEventData() {
         // create let event;
         let calendarEvent = {
@@ -97,32 +104,48 @@ export default class ChannelingForm extends Component {
                         <Card className="container" style={{marginBottom: '10%'}}>
                             <br/>
                             <Form>
-                                <Form.Group className="mb-3" controlId="formBasicName">
+                                <Form.Group className="mb-3"
+                                            controlId="formBasicName">
                                     <Form.Label>Patient Name</Form.Label>
-                                    <Form.Control type="text" name="patientName" placeholder="Enter patient's name"
-                                                  value={this.state.patientName} onChange={this.onChange}/>
+                                    <Form.Control type="text"
+                                                  name="patientName"
+                                                  placeholder="Enter patient's name"
+                                                  value={this.state.patientName}
+                                                  onChange={this.onChange}/>
                                 </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicSubject">
+                                <Form.Group className="mb-3"
+                                            controlId="formBasicSubject">
                                     <Form.Label>Subject</Form.Label>
-                                    <Form.Control type="text" name="subject" placeholder="Enter Summary"
-                                                  value={this.state.subject} onChange={this.onChange}/>
+                                    <Form.Control type="text" name="subject"
+                                                  placeholder="Enter Summary"
+                                                  value={this.state.subject}
+                                                  onChange={this.onChange}/>
                                 </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicDescription">
+                                <Form.Group className="mb-3"
+                                            controlId="formBasicDescription">
                                     <Form.Label>description</Form.Label>
-                                    <Form.Control type="text" name="description" placeholder="Enter description"
-                                                  value={this.state.description} onChange={this.onChange}/>
+                                    <Form.Control type="text"
+                                                  name="description"
+                                                  placeholder="Enter description"
+                                                  value={this.state.description}
+                                                  onChange={this.onChange}/>
                                 </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicContactNo">
+                                <Form.Group className="mb-3"
+                                            controlId="formBasicContactNo">
                                     <Form.Label>Contact Number</Form.Label>
-                                    <Form.Control type="text" name="contactNo" placeholder="Enter contact number"
-                                                  value={this.state.contactNo} onChange={this.onChange}/>
+                                    <Form.Control type="text"
+                                                  name="contactNo"
+                                                  placeholder="Enter contact number"
+                                                  value={this.state.contactNo}
+                                                  onChange={this.onChange}/>
                                 </Form.Group>
                                 <Form.Group controlId="formBasicDoctor">
-                                    <Form.Label>Select a Doctor</Form.Label> <br></br>
-                                    <Form.Control name="email" as="select"
-                                                  custom className="form-control" value={this.state.email}
-                                                  onChange={this.onChange}
-                                    >
+                                    <Form.Label>Select a Doctor</Form.Label>
+                                    <Form.Control name="email"
+                                                  as="select"
+                                                  custom className="form-control"
+                                                  value={this.state.email}
+                                                  onChange={this.onChange}>
                                         <option value="Select">Select a Doctor</option>
                                         <option value="janakachinthana1@gmail.com">Dr. Janaka Dissanayake</option>
                                         <option value="menuradewalegama@gmail.com">Dr. Menura Dewalegama</option>
@@ -132,9 +155,8 @@ export default class ChannelingForm extends Component {
                                 </Form.Group>
                                 <br></br>
                                 <div className="row">
-                                    <Button variant="primary" onClick={this.handleClick}>
-                                        Submit
-                                    </Button>
+                                    <Button variant="primary"
+                                            onClick={this.handleClick}>Submit</Button>
                                 </div>
                             </Form>
                             <br/>
@@ -147,6 +169,6 @@ export default class ChannelingForm extends Component {
 }
 
 
-
+export default withRouter(ChannelingForm)
 
 

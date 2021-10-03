@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Button, Card, Form } from 'react-bootstrap';
-import { AuthContext } from '../../context/auth.context';
-import { GoogleAuth, createCalendarEventOnGoogleCalendar } from '../../service/google-oauth.service'
+import React, {Component} from 'react';
+import {Button, Card, Form} from 'react-bootstrap';
+import {AuthContext} from '../../context/auth.context';
+import {createCalendarEventOnGoogleCalendar} from '../../service/google-oauth.service';
 
 export default class ChannelingForm extends Component {
 
@@ -29,7 +29,7 @@ export default class ChannelingForm extends Component {
     }
 
     onChange(event) {
-        this.setState({ [event.target.name]: event.target.value });
+        this.setState({[event.target.name]: event.target.value});
     }
 
     _onStartDateChange(e) {
@@ -45,9 +45,7 @@ export default class ChannelingForm extends Component {
     }
 
     handleClick() {
-        console.log(this.state);
-
-        GoogleAuth.signIn().then(value => {
+        this.context.GoogleAuth.signIn().then(value => {
             createCalendarEventOnGoogleCalendar(this.createEventData());
         }).catch(reason => {
             console.log('Please sign into the application', reason);
@@ -73,13 +71,13 @@ export default class ChannelingForm extends Component {
                 'RRULE:FREQ=DAILY;COUNT=2'
             ],
             'attendees': [
-                { 'email': this.state.email }
+                {'email': this.state.email}
             ],
             'reminders': {
                 'useDefault': false,
                 'overrides': [
-                    { 'method': 'email', 'minutes': 24 * 60 },
-                    { 'method': 'popup', 'minutes': 10 }
+                    {'method': 'email', 'minutes': 24 * 60},
+                    {'method': 'popup', 'minutes': 10}
                 ]
             }
         };
@@ -92,39 +90,39 @@ export default class ChannelingForm extends Component {
 
         return (
             <div>
-                <h1 style={{ marginTop: '5%', textAlign: 'center' }}>Enter patient's details</h1>
+                <h1 style={{marginTop: '5%', textAlign: 'center'}}>Enter patient's details</h1>
                 <hr></hr>
                 <div className="row">
                     <div className="col-md-4"></div>
                     <div className="col-md-4">
-                        <Card className="container" style={{ marginBottom: '10%' }}>
-                            <br />
+                        <Card className="container" style={{marginBottom: '10%'}}>
+                            <br/>
                             <Form>
                                 <Form.Group className="mb-3" controlId="formBasicName">
                                     <Form.Label>Patient Name</Form.Label>
                                     <Form.Control type="text" name="patientName" placeholder="Enter patient's name"
-                                        value={this.state.patientName} onChange={this.onChange} />
+                                                  value={this.state.patientName} onChange={this.onChange}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicSubject">
                                     <Form.Label>Subject</Form.Label>
                                     <Form.Control type="text" name="subject" placeholder="Enter Summary"
-                                        value={this.state.subject} onChange={this.onChange} />
+                                                  value={this.state.subject} onChange={this.onChange}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicDescription">
                                     <Form.Label>description</Form.Label>
                                     <Form.Control type="text" name="description" placeholder="Enter description"
-                                        value={this.state.description} onChange={this.onChange} />
+                                                  value={this.state.description} onChange={this.onChange}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicContactNo">
                                     <Form.Label>Contact Number</Form.Label>
                                     <Form.Control type="text" name="contactNo" placeholder="Enter contact number"
-                                        value={this.state.contactNo} onChange={this.onChange} />
+                                                  value={this.state.contactNo} onChange={this.onChange}/>
                                 </Form.Group>
                                 <Form.Group controlId="formBasicDoctor">
                                     <Form.Label>Select a Doctor</Form.Label> <br></br>
                                     <Form.Control name="email" as="select"
-                                        custom className="form-control" value={this.state.email}
-                                        onChange={this.onChange}
+                                                  custom className="form-control" value={this.state.email}
+                                                  onChange={this.onChange}
                                     >
                                         <option value="Select">Select a Doctor</option>
                                         <option value="janakachinthana1@gmail.com">Dr. Janaka Dissanayake</option>
@@ -134,14 +132,13 @@ export default class ChannelingForm extends Component {
                                     </Form.Control>
                                 </Form.Group>
                                 <br></br>
-
                                 <div className="row">
                                     <Button variant="primary" onClick={this.handleClick}>
                                         Submit
                                     </Button>
                                 </div>
                             </Form>
-                            <br />
+                            <br/>
                         </Card>
                     </div>
                 </div>

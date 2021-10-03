@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Card, Form} from 'react-bootstrap';
 import {AuthContext} from '../../context/auth.context';
-import {createCalendarEventOnGoogleCalendar} from '../../service/google-oauth.service';
 
 export default class ChannelingForm extends Component {
 
@@ -21,8 +20,8 @@ export default class ChannelingForm extends Component {
             doctorName: 'Dr Janaka Dissanayake',
             contactNo: '',
             location: 'Asiri Hospital',
-            startDate: '2021-10-04T09:00:00-07:00',
-            endDate: '2021-10-04T17:00:00-07:00',
+            startDate: '2021-10-06T09:00:00-07:00',
+            endDate: '2021-10-06T17:00:00-07:00',
             timeZone: 'America/Los_Angeles'
 
         };
@@ -46,7 +45,7 @@ export default class ChannelingForm extends Component {
 
     handleClick() {
         this.context.GoogleAuth.signIn().then(value => {
-            createCalendarEventOnGoogleCalendar(this.createEventData());
+            this.context.createCalendarEventOnGoogleCalendar(this.createEventData());
         }).catch(reason => {
             console.log('Please sign into the application', reason);
         });
